@@ -18,7 +18,9 @@ clf
 K1D = spdiags(ones(n,1)*[-1 2 -1],-1:1,n,n);  % 1d Poisson matrix
 subplot(2,3,4), spy(K1D)
 f1D = h^2*rho;                          % 1d right hand side
-u1D = K1D\f1D;
+% tic,
+u1D = pcg(K1D,f1D,1e-9,1000);
+% toc;
 return;
 
 I1D = speye(size(K1D));                       % 1d identity matrix
