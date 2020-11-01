@@ -6,8 +6,10 @@ function RHS = AssembleRHS( solution_coeffs, L, J ,N)
   % Solve Poisson's equation
   n0 = N/L;
   rho = ne/n0 - 1;
-  phi = Poisson1D( rho, L );
-  % Calculate electric field
+%   phi = Poisson1D( rho, L );
+  [u1D] = mit18086_poisson((-1)*rho,L);
+  phi = u1D;
+%   Calculate electric field
   E = GetElectric( phi, L );
   % equations of motion
   dx = L/J;
