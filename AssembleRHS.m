@@ -1,4 +1,4 @@
-function RHS = AssembleRHS( solution_coeffs, L, J )
+function RHS = AssembleRHS( solution_coeffs, L, J ,N)
   r = solution_coeffs(1:N);    v = solution_coeffs(N+1:2*N);
   r = r + L*(r<0) - L*(r>L);
   % Calculate electron number density
@@ -11,8 +11,8 @@ function RHS = AssembleRHS( solution_coeffs, L, J )
   E = GetElectric( phi, L );
   % equations of motion
   dx = L/J;
-  js = floor(r0/dx)+1;
-  ys = r0/dx - (js-1);
+  js = floor(r/dx)+1;
+  ys = r/dx - (js-1);
   js_plus_1 = mod(js,J)+1;
   Efield = E(js).*(1-ys) + E(js_plus_1);
   rdot = v;
